@@ -1,0 +1,5 @@
+{
+  "name": "VidyaSetu AI School Renderer",
+  "description": "A professional multi-tenant school website renderer with dynamic subdomain detection and Supabase integration.",
+  "requestFramePermissions": []
+}
