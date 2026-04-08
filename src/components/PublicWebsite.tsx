@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Navbar } from './Navbar';
 import { Hero } from './Hero';
 import { Highlights } from './Highlights';
@@ -19,10 +19,16 @@ interface PublicWebsiteProps {
 
 export const PublicWebsite: React.FC<PublicWebsiteProps> = ({ data, error }) => {
   const { settings, gallery, notices } = data;
-  const { content, config } = settings;
+  const { published_content, core_config } = settings;
+
+  useEffect(() => {
+    if (core_config.primary_color) {
+      document.documentElement.style.setProperty('--primary-color', core_config.primary_color);
+    }
+  }, [core_config.primary_color]);
 
   return (
-    <div className="min-h-screen selection:bg-emerald-100 selection:text-emerald-900" style={{ fontFamily: config.font_family }}>
+    <div className="min-h-screen selection:bg-emerald-100 selection:text-emerald-900" style={{ fontFamily: core_config.font_family }}>
       {error && (
         <div className="fixed top-24 left-1/2 -translate-x-1/2 z-[100] w-full max-w-md px-4">
           <div className="glass border-red-100 rounded-2xl p-4 flex items-center gap-3 shadow-2xl">
@@ -33,50 +39,50 @@ export const PublicWebsite: React.FC<PublicWebsiteProps> = ({ data, error }) => 
       )}
 
       <Navbar 
-        schoolName={content.header.title} 
-        primaryColor={config.primary_color}
+        schoolName={published_content.header.title} 
+        primaryColor={core_config.primary_color}
       />
 
       <main>
         <Hero 
-          heading={content.hero.heading}
-          subheading={content.hero.subheading}
-          bannerUrl={content.hero.banner_url}
-          ctaText={content.hero.cta_text}
-          primaryColor={config.primary_color}
+          heading={published_content.hero.heading}
+          subheading={published_content.hero.subheading}
+          bannerUrl={published_content.hero.banner_url}
+          ctaText={published_content.hero.cta_text}
+          primaryColor={core_config.primary_color}
         />
 
-        <Highlights items={content.highlights} />
+        <Highlights items={published_content.highlights} />
 
-        <About content={content.about.content} imageUrl={content.about.image_url} />
+        <About content={published_content.about.content} imageUrl={published_content.about.image_url} />
 
         <Facilities 
-          items={content.facilities}
-          primaryColor={config.primary_color}
+          items={published_content.facilities}
+          primaryColor={core_config.primary_color}
         />
 
         <Gallery images={gallery} />
 
-        <Notices notices={notices} primaryColor={config.primary_color} />
+        <Notices notices={notices} primaryColor={core_config.primary_color} />
 
         <AdmissionForm 
-          fields={content.form_config}
-          primaryColor={config.primary_color}
+          fields={published_content.form_config}
+          primaryColor={core_config.primary_color}
           schoolId={settings.school_id}
         />
 
         <Contact 
-          address={content.contact.address}
-          phone={content.contact.phone}
-          email={content.contact.email}
-          primaryColor={config.primary_color}
+          address={published_content.contact.address}
+          phone={published_content.contact.phone}
+          email={published_content.contact.email}
+          primaryColor={core_config.primary_color}
         />
       </main>
 
       <Footer 
-        schoolName={content.header.title}
-        footerText={content.footer.text}
-        primaryColor={config.primary_color}
+        schoolName={published_content.header.title}
+        footerText={published_content.footer.text}
+        primaryColor={core_config.primary_color}
       />
     </div>
   );

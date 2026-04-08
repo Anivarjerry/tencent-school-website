@@ -7,7 +7,7 @@ const DEFAULT_SETTINGS: WebsiteSettings = {
   id: 'default',
   school_id: 'default',
   subdomain_slug: 'default',
-  content: {
+  published_content: {
     header: {
       title: 'VidyaSetu AI Digital School',
       logo_url: ''
@@ -52,7 +52,7 @@ const DEFAULT_SETTINGS: WebsiteSettings = {
       text: '© 2026 VidyaSetu AI Digital School. All rights reserved.'
     }
   },
-  config: {
+  core_config: {
     primary_color: '#10b981',
     font_family: 'Inter'
   }
