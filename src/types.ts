@@ -48,6 +48,7 @@ export interface WebsiteSettingsConfig {
 export interface WebsiteSettings {
   id: string;
   school_id: string;
+  subdomain_slug: string;
   content: WebsiteSettingsContent;
   config: WebsiteSettingsConfig;
 }
